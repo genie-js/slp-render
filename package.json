@@ -8,4 +8,8 @@
 , "keywords":
   [ "genie-slp", "genie", "slp", "graphics", "age of empires", "render", "png" ]
 , "dependencies":
-  { "meow": "^3.6.0" } }
+  { "genie-slp": "^0.7.1"
+  , "jascpal": "^0.1.2"
+  , "meow": "^3.6.0"
+  , "mkdirp": "^0.5.1"
+  , "pngjs": "^2.2.0" } }
