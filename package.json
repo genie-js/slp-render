@@ -1,0 +1,11 @@
+{ "name": "slp-render"
+, "version": "0.0.0"
+, "description": "CLI tool for rendering Genie .SLP files (Age of Empires / SWGB) to PNGs."
+, "license": "MIT"
+, "repository": "goto-bus-stop/slp-render"
+, "author": "René Kooi <rene@kooi.me>"
+, "bin": "index.js"
+, "keywords":
+  [ "genie-slp", "genie", "slp", "graphics", "age of empires", "render", "png" ]
+, "dependencies":
+  { "meow": "^3.6.0" } }
