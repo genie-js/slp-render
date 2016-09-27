@@ -1,6 +1,6 @@
 {
   "name": "slp-render",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "CLI tool for rendering Genie .SLP files (Age of Empires / SWGB) to PNGs.",
   "license": "MIT",
   "repository": "goto-bus-stop/slp-render",
