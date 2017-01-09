@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "genie-slp": "^0.7.1",
-    "jascpal": "^0.1.2",
+    "jascpal": "^0.1.4",
     "meow": "^3.6.0",
     "mkdirp": "^0.5.1",
     "pngjs": "^3.0.0"
