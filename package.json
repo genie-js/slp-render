@@ -19,7 +19,7 @@
     "node": ">= 4"
   },
   "dependencies": {
-    "genie-slp": "^0.7.1",
+    "genie-slp": "^1.0.0",
     "jascpal": "^0.1.2",
     "meow": "^3.6.0",
     "mkdirp": "^0.5.1",

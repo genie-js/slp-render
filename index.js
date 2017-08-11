@@ -12,9 +12,10 @@ var PNG = require('pngjs').PNG
 var cli = meow({
   help: [
     'Usage',
-    '  $ slp-render <slp-file> <out-dir> [--palette=<file>] [--player=<number>] [--draw-outline]',
+    '  $ slp-render <slp-file> [--inspect] [<out-dir>] [--palette=<file>] [--player=<number>] [--draw-outline]',
     '',
     'Options',
+    '  --inspect       Show metadata about the file, like the size and the amount of frames.',
     '  --palette       JASC-PAL palette file path to get colours from. Defaults to',
     '                  the default Age of Empires 2 unit palette (50500).',
     '  -p, --player    Player colour to use for rendering units. Defaults to 1.',
@@ -28,7 +29,10 @@ var cli = meow({
 }, {
   alias: {
     p: 'player'
-  }
+  },
+  boolean: [
+    'inspect'
+  ]
 })
 
 var flags = cli.flags
@@ -44,17 +48,27 @@ var playerIdMap = {
   7: 5 // orange
 }
 
-// genie-slp returns alpha as a transparency value between 0-255, where higher
-// is more transparent. PNG-js uses an opacity value, where higher is more
-// *opaque*, so we have to invert that to get good results.
-function invertAlpha (buffer) {
-  var i = 0
-    , l = buffer.length
-  while (i < l) {
-    buffer[i + 3] = 255 - buffer[i + 3]
-    i += 4
-  }
-  return buffer
+function inspect (file) {
+  var slp = SLP(fs.readFileSync(file))
+  slp.parseHeader()
+
+  var lines = [
+    'Version: ' + slp.version,
+    'Comment: ' + slp.comment,
+    'Frames (' + slp.numFrames + '):'
+  ]
+  slp.frames.forEach(function (frame, i) {
+    lines.push(
+      '#' + i,
+      '  Size: ' + frame.width + 'x' + frame.height,
+      '  Center: ' + frame.hotspot.x + 'x' + frame.hotspot.y,
+      '  Properties: ' + frame.properties
+    )
+  })
+
+  lines.forEach(function (line) {
+    console.log(line)
+  })
 }
 
 function run (file, outDir) {
@@ -74,16 +88,25 @@ function run (file, outDir) {
       width: frame.width,
       height: frame.height
     })
-    png.data = invertAlpha(frame.buffer)
+    png.data = Buffer.from(frame.data.buffer)
     png.pack().pipe(
       fs.createWriteStream(path.join(outDir, i + '.png'))
     )
   }
 }
 
-if (cli.input.length < 2) {
+function exit () {
   cli.showHelp()
-  process.exit(0)
+  process.exit(1)
 }
 
-run(cli.input[0], cli.input[1] + '')
+if (flags.inspect) {
+  if (cli.input.length < 1) {
+    exit()
+  }
+  inspect(cli.input[0])
+} else if (cli.input.length < 2) {
+  exit()
+} else {
+  run(cli.input[0], cli.input[1] + '')
+}
