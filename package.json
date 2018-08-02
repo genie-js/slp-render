@@ -21,7 +21,7 @@
   "dependencies": {
     "genie-slp": "^1.0.0",
     "jascpal": "^0.1.2",
-    "meow": "^3.6.0",
+    "meow": "^5.0.0",
     "mkdirp": "^0.5.1",
     "pngjs": "^3.0.0"
   }

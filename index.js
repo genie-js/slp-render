@@ -9,30 +9,28 @@ var meow = require('meow')
 var mkdirp = require('mkdirp')
 var PNG = require('pngjs').PNG
 
-var cli = meow({
-  help: [
-    'Usage',
-    '  $ slp-render <slp-file> [--inspect] [<out-dir>] [--palette=<file>] [--player=<number>] [--draw-outline]',
-    '',
-    'Options',
-    '  --inspect       Show metadata about the file, like the size and the amount of frames.',
-    '  --palette       JASC-PAL palette file path to get colours from. Defaults to',
-    '                  the default Age of Empires 2 unit palette (50500).',
-    '  -p, --player    Player colour to use for rendering units. Defaults to 1.',
-    '  --draw-outline  Draw the outline around the unit instead of the unit itself.',
-    '                  This is used by the games for rendering units behind buildings.',
-    '',
-    'Example',
-    '  $ slp-render graphics.drs/2.slp archer/ --player=3',
-    '  $ slp-render interfac.drs/50100.slp loading-background/ --palette=interfac.drs/50532.bin'
-  ]
-}, {
-  alias: {
-    p: 'player'
-  },
-  boolean: [
-    'inspect'
-  ]
+var help = 'Usage\n' +
+    '  $ slp-render <slp-file> [--inspect] [<out-dir>] [--palette=<file>] [--player=<number>] [--draw-outline]\n' +
+    '\n' +
+    'Options\n' +
+    '  --inspect       Show metadata about the file, like the size and the amount of frames.\n' +
+    '  --palette       JASC-PAL palette file path to get colours from. Defaults to\n' +
+    '                  the default Age of Empires 2 unit palette (50500).\n' +
+    '  -p, --player    Player colour to use for rendering units. Defaults to 1.\n' +
+    '  --draw-outline  Draw the outline around the unit instead of the unit itself.\n' +
+    '                  This is used by the games for rendering units behind buildings.\n' +
+    '\n' +
+    'Example\n' +
+    '  $ slp-render graphics.drs/2.slp archer/ --player=3\n' +
+    '  $ slp-render interfac.drs/50100.slp loading-background/ --palette=interfac.drs/50532.bin\n'
+
+var cli = meow(help, {
+  flags: {
+    inspect: { type: 'boolean' },
+    palette: { type: 'string' },
+    player: { type: 'string', alias: 'p' },
+    drawOutline: { type: 'boolean' }
+  }
 })
 
 var flags = cli.flags
