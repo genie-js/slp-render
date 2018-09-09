@@ -62,6 +62,14 @@ function inspect (file) {
       '  Center: ' + frame.hotspot.x + 'x' + frame.hotspot.y,
       '  Properties: ' + frame.properties
     )
+
+    if (flags.commands) {
+      slp.parseFrame(i)
+      lines.push('  Commands:')
+      frame.commands.forEach(function (cmd) {
+        lines.push('  - ' + JSON.stringify(cmd))
+      })
+    }
   })
 
   lines.forEach(function (line) {
