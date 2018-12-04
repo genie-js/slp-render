@@ -1,5 +1,7 @@
 # slp-render
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/genie-js/slp-render.svg)](https://greenkeeper.io/)
+
 Render Genie engine (Age of Empires, SWGB) .SLP files to PNGs.
 
 ## Installation
