@@ -30,7 +30,7 @@ Example
 
 ## Programmatic Usage
 
-Use [genie-slp](https://github.com/goto-bus-stop/genie-slp), the API library :)
+Use [genie-slp](https://github.com/genie-js/genie-slp), the API library :)
 
 ## Licence
 
